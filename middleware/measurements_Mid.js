@@ -15,3 +15,21 @@ async function addMeasurement(req, res, next) {
         res.status(500).json({ message: 'Error adding measurement', error: err.message });
     }
 }
+
+async function getHistory(req, res, next) {
+    const { userId } = req.params;
+
+    if (!userId) {
+        return res.status(400).json({ message: 'User ID is required' });
+    }
+
+    const query = 'SELECT * FROM measurements WHERE user_id = ? ORDER BY date DESC';
+    try {
+        const [rows] = await db_pool.promise().query(query, [userId]);
+        req.history = rows;
+        next();
+    } catch (err) {
+        console.error('Error fetching history:', err);
+        res.status(500).json({ message: 'Error fetching history', error: err.message });
+    }
+}
