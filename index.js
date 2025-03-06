@@ -36,6 +36,25 @@ app.get('/measurements', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'measurements.html'));
 });
 
+const doc = {
+    info: {
+        title: 'Blood Pressure Tracker API',
+        description: 'API for tracking blood pressure measurements'
+    },
+    host: `localhost:${port}`
+};
+
+const outputFile = './swagger-output.json';
+const routes = ['./index.js'];
+
+swaggerAutogen(outputFile, routes, doc).then(() => {
+    const swaggerDocument = require('./swagger-output.json');
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    });
+});
 app.get('/history/:userId', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'history.html'));
 });
