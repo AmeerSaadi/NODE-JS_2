@@ -60,6 +60,3 @@ swaggerAutogen(outputFile, routes, doc).then(() => {
         console.log(`Server running at http://localhost:${port}`);
     });
 });
-app.get('/history/:userId', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'history.html'));
-});
