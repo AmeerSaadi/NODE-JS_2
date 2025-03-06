@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measurements</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Measurements</h1>
+<nav>
+    <a href="/">Home</a>
+    <a href="/users">Users</a>
+    <a href="/measurements">Measurements</a>
+    <a href="/api-docs">API Docs</a>
+</nav>
+<div class="container">
+    <h2>Add Measurement</h2>
+    <form id="addMeasurementForm">
+        <label for="userId">User:</label>
+        <select name="userId" id="userId"></select>
+        <label for="systolic">Systolic:</label>
+        <input type="number" name="systolic" id="systolic" required>
+        <label for="diastolic">Diastolic:</label>
+        <input type="number" name="diastolic" id="diastolic" required>
+        <label for="pulse">Pulse:</label>
+        <input type="number" name="pulse" id="pulse" required>
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" required>
+        <button type="submit">Add Measurement</button>
+    </form>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>
