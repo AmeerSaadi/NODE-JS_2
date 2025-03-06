@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measurement History</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Measurement History</h1>
+<nav>
+    <a href="/">Home</a>
+    <a href="/users">Users</a>
+    <a href="/measurements">Measurements</a>
+    <a href="/api-docs">API Docs</a>
+</nav>
+<div class="container">
+    <%- include('partials/messages.ejs') %>
+    <h2>History for User <%= userId %></h2>
+    <table id="historyTable">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Systolic</th>
+            <th>Diastolic</th>
+            <th>Pulse</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% history.forEach(measurement => { %>
+        <tr class="<%= measurement.isAbnormal ? 'abnormal' : '' %>">
+            <td><%= measurement.date %></td>
+            <td><%= measurement.systolic %></td>
+            <td><%= measurement.diastolic %></td>
+            <td><%= measurement.pulse %></td>
+            <td><%= measurement.isAbnormal ? 'Abnormal' : 'Normal' %></td>
+        </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>
