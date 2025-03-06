@@ -36,6 +36,11 @@ app.get('/measurements', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'measurements.html'));
 });
 
+app.get('/history/:userId', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'history.html'));
+});
+
+
 const doc = {
     info: {
         title: 'Blood Pressure Tracker API',
