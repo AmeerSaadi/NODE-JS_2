@@ -54,3 +54,9 @@ async function getStats(req, res, next) {
         res.status(500).json({ message: 'Error fetching stats', error: err.message });
     }
 }
+
+module.exports = {
+    addMeasurement,
+    getHistory,
+    getStats
+};
