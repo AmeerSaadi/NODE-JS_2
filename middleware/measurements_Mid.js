@@ -33,3 +33,24 @@ async function getHistory(req, res, next) {
         res.status(500).json({ message: 'Error fetching history', error: err.message });
     }
 }
+
+async function getStats(req, res, next) {
+    const query = `
+        SELECT user_id, 
+               AVG(systolic) AS avg_systolic, 
+               AVG(diastolic) AS avg_diastolic, 
+               COUNT(CASE WHEN systolic > 1.2 * (SELECT AVG(systolic) FROM measurements) 
+                           OR diastolic > 1.2 * (SELECT AVG(diastolic) FROM measurements) 
+                           THEN 1 END) AS abnormal_count
+        FROM measurements
+        GROUP BY user_id;
+    `;
+    try {
+        const [rows] = await db_pool.promise().query(query);
+        req.stats = rows;
+        next();
+    } catch (err) {
+        console.error('Error fetching stats:', err);
+        res.status(500).json({ message: 'Error fetching stats', error: err.message });
+    }
+}
