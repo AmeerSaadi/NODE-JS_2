@@ -21,3 +21,21 @@ const users_R = require('./Routers/users_R');
 const measurements_R = require('./Routers/measurements_R');
 app.use('/users', users_R);
 app.use('/measurements', measurements_R);
+
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+app.get('/users', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'users.html'));
+});
+
+app.get('/measurements', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'measurements.html'));
+});
+
+app.get('/history/:userId', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'history.html'));
+});
